@@ -40,16 +40,27 @@ export default function App() {
   const { state, runSwarm, reset } = useSwarmState()
   const [loading, setLoading] = useState(false)
   const [apiKey, setApiKey] = useState('')
+  const [threatCount, setThreatCount] = useState(0)
+  const [totalScanned, setTotalScanned] = useState(0)
 
   const { isMonitoring, lastBlock, error: rpcError, startMonitoring, stopMonitoring, CONTRACT_ADDRESS } =
-    useOnChainMonitor((event) => { if (apiKey) runSwarm(event, apiKey) })
+    useOnChainMonitor((event) => {
+      setTotalScanned(n => n + 1)
+      if (apiKey) runSwarm(event, apiKey).then(() => {
+        if (event.eventName === 'SuspiciousActivity') setThreatCount(n => n + 1)
+      })
+    })
 
   const handleEvent = async (event: OnChainEvent) => {
     if (!apiKey.trim()) { alert('Enter your API key first'); return }
+    setTotalScanned(n => n + 1)
     setLoading(true)
     await runSwarm(event, apiKey)
+    if (event.eventName === 'SuspiciousActivity') setThreatCount(n => n + 1)
     setLoading(false)
   }
+
+  const etherscanBase = 'https://sepolia.etherscan.io'
 
   return (
     <div style={s.root}>
@@ -67,18 +78,37 @@ export default function App() {
         </div>
       </div>
 
+      {/* Stats Bar */}
+      <div style={s.statsBar}>
+        <div style={s.statBox}>
+          <div style={s.statNum}>{threatCount}</div>
+          <div style={s.statLabel}>THREATS DETECTED</div>
+        </div>
+        <div style={s.statBox}>
+          <div style={s.statNum}>{totalScanned}</div>
+          <div style={s.statLabel}>EVENTS SCANNED</div>
+        </div>
+        <div style={s.statBox}>
+          <div style={{...s.statNum, color: '#00ff88'}}>{state.result?.outcome === 'EXECUTE' ? '1' : '0'}</div>
+          <div style={s.statLabel}>ACTIONS EXECUTED</div>
+        </div>
+        <div style={s.statBox}>
+          <div style={{...s.statNum, color: '#00aaff'}}>{isMonitoring ? 'LIVE' : 'OFF'}</div>
+          <div style={s.statLabel}>MONITOR STATUS</div>
+        </div>
+      </div>
+
       {/* API Key */}
       <div style={s.section}>
         <div style={s.label}>AI PROVIDER API KEY</div>
         <input
           type="password"
-          placeholder="sk-ant-... or gsk_... (Groq)"
+          placeholder="sk-ant-... (Anthropic) or gsk_... (Groq — free at console.groq.com)"
           value={apiKey}
           onChange={e => setApiKey(e.target.value)}
           style={s.input}
         />
         {apiKey && <div style={{color:'#00ff88', fontSize:'0.7rem', marginTop:'0.3rem'}}>✓ Key set — ready to run</div>}
-        <div style={{color:'#444', fontSize:'0.65rem', marginTop:'0.25rem'}}>Used directly in browser, never stored. Supports Anthropic or Groq.</div>
       </div>
 
       {/* Three Heads */}
@@ -95,17 +125,15 @@ export default function App() {
               lbl = vote.vote
             }
             if (isWatcher && state.currentProposal && state.status === 'voting') { color = '#ffaa00'; lbl = 'PROPOSED' }
+            const pulse = (isWatcher && state.status === 'watching') || (state.status === 'voting' && !isWatcher)
             return (
-              <div key={id} style={{...s.card, borderColor: color}}>
-                <div style={{fontSize:'1.5rem', marginBottom:'0.5rem'}}>
-                  {i === 0 ? '👁' : i === 1 ? '⚖️' : '🛡️'}
-                </div>
+              <div key={id} style={{...s.card, borderColor: color, boxShadow: pulse ? '0 0 12px ' + color + '44' : 'none'}}>
+                <div style={{fontSize:'1.5rem', marginBottom:'0.5rem'}}>{i === 0 ? '👁' : i === 1 ? '⚖️' : '🛡️'}</div>
                 <div style={{fontSize:'0.8rem', color:'#fff', fontWeight:700, marginBottom:'0.25rem'}}>{id}</div>
-                <div style={{fontSize:'0.7rem', color, letterSpacing:'0.1em', marginBottom:'0.25rem'}}>{lbl}</div>
-                <div style={{fontSize:'0.65rem', color:'#555'}}>
-                  {i === 0 ? 'Watcher' : i === 1 ? 'Validator A' : 'Validator B'}
-                </div>
-                {vote && <div style={{fontSize:'0.6rem', color:'#666', marginTop:'0.4rem', lineHeight:1.4}}>{vote.reasoning.slice(0, 70)}...</div>}
+                <div style={{fontSize:'0.7rem', color, letterSpacing:'0.1em', marginBottom:'0.25rem',
+                  animation: pulse ? 'none' : undefined}}>{lbl}</div>
+                <div style={{fontSize:'0.65rem', color:'#555'}}>{i === 0 ? 'Watcher' : i === 1 ? 'Validator A' : 'Validator B'}</div>
+                {vote && <div style={{fontSize:'0.6rem', color:'#666', marginTop:'0.4rem', lineHeight:1.4}}>{vote.reasoning.slice(0, 80)}...</div>}
               </div>
             )
           })}
@@ -116,20 +144,35 @@ export default function App() {
       {state.currentProposal && (
         <div style={s.section}>
           <div style={s.label}>ACTIVE THREAT PROPOSAL</div>
-          <div style={{...s.box, borderColor:'#ff660033'}}>
+          <div style={{...s.box, borderColor:'#ff660044'}}>
             {[
-              ['ID', state.currentProposal.id],
+              ['PROPOSAL ID', state.currentProposal.id],
               ['SEVERITY', state.currentProposal.severity],
-              ['EVENT', state.currentProposal.eventType],
-              ['TX', state.currentProposal.txHash.slice(0,20) + '...'],
+              ['EVENT TYPE', state.currentProposal.eventType],
               ['EVIDENCE', state.currentProposal.evidence],
               ['PROPOSED BY', state.currentProposal.proposedBy],
             ].map(([k, v]) => (
-              <div key={k} style={{display:'flex', gap:'1rem', marginBottom:'0.4rem'}}>
-                <span style={{fontSize:'0.65rem', color:'#444', minWidth:90}}>{k}</span>
-                <span style={{fontSize:'0.8rem', color: k === 'SEVERITY' ? (v === 'CRITICAL' ? '#ff3300' : '#ffaa00') : '#ccc'}}>{v}</span>
+              <div key={k} style={{display:'flex', gap:'1rem', marginBottom:'0.5rem', alignItems:'flex-start'}}>
+                <span style={{fontSize:'0.65rem', color:'#444', minWidth:100, paddingTop:2}}>{k}</span>
+                <span style={{fontSize:'0.8rem', color: k === 'SEVERITY' ? (v === 'CRITICAL' ? '#ff3300' : v === 'HIGH' ? '#ff6600' : '#ffaa00') : '#ccc'}}>{v}</span>
               </div>
             ))}
+            <div style={{display:'flex', gap:'1rem', marginBottom:'0.5rem', alignItems:'center'}}>
+              <span style={{fontSize:'0.65rem', color:'#444', minWidth:100}}>TX HASH</span>
+              <a href={etherscanBase + '/tx/' + state.currentProposal.txHash}
+                target="_blank" rel="noopener noreferrer"
+                style={{fontSize:'0.75rem', color:'#00aaff', textDecoration:'none'}}>
+                {state.currentProposal.txHash.slice(0,20)}... ↗
+              </a>
+            </div>
+            <div style={{display:'flex', gap:'1rem', alignItems:'center'}}>
+              <span style={{fontSize:'0.65rem', color:'#444', minWidth:100}}>CONTRACT</span>
+              <a href={etherscanBase + '/address/' + state.currentProposal.contractAddress}
+                target="_blank" rel="noopener noreferrer"
+                style={{fontSize:'0.75rem', color:'#00aaff', textDecoration:'none'}}>
+                {state.currentProposal.contractAddress.slice(0,20)}... ↗
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -142,14 +185,19 @@ export default function App() {
             <div style={{fontSize:'2rem', fontWeight:900, color: state.result.outcome === 'EXECUTE' ? '#00ff88' : '#ff4444'}}>
               {state.result.outcome === 'EXECUTE' ? '✅ EXECUTED' : '❌ DISCARDED'}
             </div>
-            <div style={{marginTop:'0.75rem', fontSize:'0.85rem', fontWeight:700}}>
+            <div style={{marginTop:'0.75rem', fontSize:'0.9rem', fontWeight:700}}>
               <span style={{color:'#00ff88'}}>YES: {state.result.yesCount}</span>
               <span style={{color:'#ff4444', marginLeft:'1rem'}}>NO: {state.result.noCount}</span>
               <span style={{color:'#888', marginLeft:'1rem'}}>ABSTAIN: {state.result.abstainCount}</span>
             </div>
             {state.result.outcome === 'EXECUTE' && (
-              <div style={{color:'#555', fontSize:'0.7rem', marginTop:'0.5rem'}}>
-                KeeperHub alerted · 0G audit written · {new Date(state.result.executedAt!).toISOString()}
+              <div style={{marginTop:'0.75rem'}}>
+                <div style={{color:'#555', fontSize:'0.7rem'}}>
+                  ⚡ KeeperHub alerted · 🗄️ 0G audit written
+                </div>
+                <div style={{color:'#555', fontSize:'0.7rem', marginTop:'0.25rem'}}>
+                  {new Date(state.result.executedAt!).toISOString()}
+                </div>
               </div>
             )}
           </div>
@@ -158,18 +206,22 @@ export default function App() {
 
       {/* Live Monitor */}
       <div style={s.section}>
-        <div style={s.label}>LIVE ON-CHAIN MONITOR · SEPOLIA</div>
-        <div style={{display:'flex', gap:'0.75rem', alignItems:'center', flexWrap:'wrap' as const}}>
+        <div style={s.label}>LIVE ON-CHAIN MONITOR · ETHEREUM SEPOLIA</div>
+        <div style={{display:'flex', gap:'0.75rem', alignItems:'center', flexWrap:'wrap' as const, marginBottom:'0.5rem'}}>
           <button
             onClick={isMonitoring ? stopMonitoring : startMonitoring}
-            style={{...s.btn, borderColor: isMonitoring ? '#00ff88' : '#333', color: isMonitoring ? '#00ff88' : '#888', padding:'0.5rem 1rem'}}>
+            style={{...s.btn, borderColor: isMonitoring ? '#00ff88' : '#333', color: isMonitoring ? '#00ff88' : '#888', padding:'0.5rem 1.25rem', fontWeight:700}}>
             {isMonitoring ? '⏹ STOP MONITOR' : '▶ START LIVE MONITOR'}
           </button>
           {isMonitoring && <span style={{fontSize:'0.75rem', color:'#00ff88'}}>⟳ Polling every 5s · Block #{lastBlock}</span>}
           {rpcError && <span style={{fontSize:'0.75rem', color:'#ff4444'}}>{rpcError}</span>}
         </div>
-        <div style={{fontSize:'0.65rem', color:'#444', marginTop:'0.4rem'}}>
-          Contract: {CONTRACT_ADDRESS}
+        <div style={{fontSize:'0.65rem', color:'#444'}}>
+          Monitoring:{' '}
+          <a href={etherscanBase + '/address/' + CONTRACT_ADDRESS} target="_blank" rel="noopener noreferrer"
+            style={{color:'#555', textDecoration:'none'}}>
+            {CONTRACT_ADDRESS} ↗
+          </a>
         </div>
       </div>
 
@@ -179,27 +231,33 @@ export default function App() {
         <div style={s.grid3}>
           {DEMO_EVENTS.map((ev, i) => (
             <button key={i} disabled={loading} onClick={() => handleEvent(ev)}
-              style={{...s.btn, opacity: loading ? 0.5 : 1}}>
-              <div style={{fontSize:'0.85rem', fontWeight:700, color:'#ff6600', marginBottom:'0.25rem'}}>{ev.eventName}</div>
+              style={{...s.btn, opacity: loading ? 0.5 : 1, borderColor: ev.eventName === 'SuspiciousActivity' ? '#ff330033' : '#222'}}>
+              <div style={{fontSize:'0.85rem', fontWeight:700,
+                color: ev.eventName === 'SuspiciousActivity' ? '#ff3300' : ev.eventName === 'Withdrawal' ? '#ffaa00' : '#00ff88',
+                marginBottom:'0.25rem'}}>
+                {ev.eventName === 'SuspiciousActivity' ? '🚨' : ev.eventName === 'Withdrawal' ? '⚠️' : '✅'} {ev.eventName}
+              </div>
               <div style={{fontSize:'0.7rem', color:'#555'}}>Block #{ev.blockNumber}</div>
-              <div style={{fontSize:'0.7rem', color:'#555'}}>{ev.txHash.slice(0,16)}...</div>
+              <div style={{fontSize:'0.7rem', color:'#555', fontFamily:'monospace'}}>{ev.txHash.slice(0,16)}...</div>
             </button>
           ))}
         </div>
         {state.status !== 'idle' && (
-          <button onClick={reset} style={{...s.btn, marginTop:'1rem', color:'#555'}}>RESET</button>
+          <button onClick={() => { reset(); }} style={{...s.btn, marginTop:'1rem', color:'#555', padding:'0.4rem 1rem'}}>
+            ↺ RESET SWARM
+          </button>
         )}
       </div>
 
       {/* Log */}
       <div style={s.section}>
-        <div style={s.label}>CERBERUS LOG</div>
+        <div style={s.label}>CERBERUS SWARM LOG</div>
         <div style={s.log}>
           {state.log.length === 0
-            ? <div style={{color:'#333'}}>Awaiting threats...</div>
+            ? <div style={{color:'#333', fontSize:'0.75rem'}}>[ Awaiting threats... ]</div>
             : state.log.map((line, i) => (
-              <div key={i} style={{fontSize:'0.75rem', lineHeight:1.6,
-                color: line.includes('✅') ? '#00ff88' : line.includes('⚠️') ? '#ffaa00' : line.includes('❌') ? '#ff4444' : '#777'}}>
+              <div key={i} style={{fontSize:'0.75rem', lineHeight:1.7, fontFamily:'monospace',
+                color: line.includes('✅') ? '#00ff88' : line.includes('⚠️') ? '#ffaa00' : line.includes('❌') ? '#ff4444' : line.includes('THREAT') ? '#ff6600' : '#666'}}>
                 {line}
               </div>
             ))
@@ -207,28 +265,53 @@ export default function App() {
         </div>
       </div>
 
+      {/* Partner badges */}
+      <div style={s.section}>
+        <div style={s.label}>POWERED BY</div>
+        <div style={{display:'flex', gap:'1rem', flexWrap:'wrap' as const}}>
+          {[
+            ['🔵', 'Gensyn', 'Decentralized Agent Network'],
+            ['🟣', 'KeeperHub', 'On-chain Execution'],
+            ['🟡', '0G Labs', 'Decentralized Storage'],
+            ['⚡', 'Groq', 'AI Inference'],
+            ['🔷', 'Alchemy', 'Blockchain RPC'],
+          ].map(([emoji, name, desc]) => (
+            <div key={name} style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'0.5rem 0.75rem', fontSize:'0.7rem'}}>
+              <span>{emoji}</span>
+              <span style={{color:'#fff', fontWeight:700, marginLeft:'0.4rem'}}>{name}</span>
+              <span style={{color:'#444', marginLeft:'0.4rem'}}>{desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Footer */}
-      <div style={{textAlign:'center', fontSize:'0.7rem', color:'#333', borderTop:'1px solid #1a1a1a', paddingTop:'1rem', marginTop:'2rem'}}>
+      <div style={{textAlign:'center' as const, fontSize:'0.7rem', color:'#333', borderTop:'1px solid #1a1a1a', paddingTop:'1rem', marginTop:'2rem'}}>
         Cerberus Protocol · ETHGlobal Open Agents 2026 ·{' '}
         <a href="https://github.com/Artem1981777/cerberus-protocol" style={{color:'#ff6600'}}>GitHub</a>
-        {' '}· Powered by Gensyn · KeeperHub · 0G Labs
+        {' '}·{' '}
+        <a href="https://twitter.com/ArtemGromov777" style={{color:'#ff6600'}}>@ArtemGromov777</a>
       </div>
     </div>
   )
 }
 
 const s: Record<string, React.CSSProperties> = {
-  root: {background:'#0a0a0a', color:'#e0e0e0', minHeight:'100vh', fontFamily:'monospace', padding:'1.5rem', maxWidth:'900px', margin:'0 auto'},
-  header: {display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid #1e1e1e', paddingBottom:'1rem', marginBottom:'2rem'},
+  root: {background:'#0a0a0a', color:'#e0e0e0', minHeight:'100vh', fontFamily:'monospace', padding:'1.5rem', maxWidth:'960px', margin:'0 auto'},
+  header: {display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid #1e1e1e', paddingBottom:'1rem', marginBottom:'1.5rem'},
   headerLeft: {display:'flex', alignItems:'center', gap:'1rem'},
   title: {fontSize:'1.5rem', fontWeight:900, color:'#fff', letterSpacing:'0.05em'},
-  sub: {fontSize:'0.65rem', color:'#555'},
+  sub: {fontSize:'0.65rem', color:'#555', marginTop:'0.2rem'},
+  statsBar: {display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'0.75rem', marginBottom:'2rem'},
+  statBox: {background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'0.75rem', textAlign:'center' as const},
+  statNum: {fontSize:'1.5rem', fontWeight:900, color:'#ff6600'},
+  statLabel: {fontSize:'0.6rem', color:'#444', letterSpacing:'0.15em', marginTop:'0.25rem'},
   section: {marginBottom:'2rem'},
   label: {fontSize:'0.7rem', color:'#444', letterSpacing:'0.2em', marginBottom:'0.75rem', borderBottom:'1px solid #1a1a1a', paddingBottom:'0.25rem'},
   input: {background:'#111', border:'1px solid #333', color:'#ff6600', padding:'0.5rem 0.75rem', fontFamily:'monospace', fontSize:'0.8rem', width:'100%', borderRadius:'4px', outline:'none', boxSizing:'border-box' as const},
   grid3: {display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'0.75rem'},
-  card: {background:'#111', border:'1px solid #222', borderRadius:'4px', padding:'0.75rem', textAlign:'center' as const, transition:'border-color 0.3s'},
+  card: {background:'#111', border:'1px solid #222', borderRadius:'4px', padding:'0.75rem', textAlign:'center' as const, transition:'all 0.3s'},
   box: {background:'#111', border:'1px solid #333', borderRadius:'4px', padding:'1rem'},
-  btn: {background:'#111', border:'1px solid #222', borderRadius:'4px', padding:'0.75rem', cursor:'pointer', textAlign:'left' as const, color:'#e0e0e0', fontFamily:'monospace', display:'block', width:'100%'},
-  log: {background:'#0d0d0d', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'1rem', height:'200px', overflowY:'auto' as const, display:'flex', flexDirection:'column-reverse' as const},
+  btn: {background:'#111', border:'1px solid #222', borderRadius:'4px', padding:'0.75rem', cursor:'pointer', textAlign:'left' as const, color:'#e0e0e0', fontFamily:'monospace', display:'block', width:'100%', transition:'border-color 0.2s'},
+  log: {background:'#0d0d0d', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'1rem', height:'220px', overflowY:'auto' as const, display:'flex', flexDirection:'column-reverse' as const},
 }
