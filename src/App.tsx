@@ -111,6 +111,45 @@ export default function App() {
         {apiKey && <div style={{color:'#00ff88', fontSize:'0.7rem', marginTop:'0.3rem'}}>✓ Key set — ready to run</div>}
       </div>
 
+      {/* Cerberus Visual */}
+      <div style={{textAlign:'center' as const, marginBottom:'1.5rem', padding:'1rem', background:'#0d0d0d', borderRadius:'8px', border:'1px solid #1a1a1a'}}>
+        <div style={{fontSize:'0.65rem', color:'#333', letterSpacing:'0.3em', marginBottom:'0.5rem'}}>CERBERUS THREAT DETECTION SWARM</div>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'flex-end', gap:'0.5rem', fontFamily:'monospace', fontSize:'0.7rem', color:'#ff6600', lineHeight:1.3}}>
+          <div style={{textAlign:'center' as const}}>
+            <div style={{color: state.status !== 'idle' ? '#ff6600' : '#333'}}>  /\_/\  </div>
+            <div style={{color: state.status !== 'idle' ? '#ff6600' : '#333'}}> ( o.o ) </div>
+            <div style={{color: state.status !== 'idle' ? '#ff4400' : '#333'}}> {">"} HEAD1 {"<"}</div>
+            <div style={{color:'#555', fontSize:'0.6rem'}}>👁 Watcher</div>
+          </div>
+          <div style={{textAlign:'center' as const, marginBottom:'0.5rem', color:'#333'}}>
+            <div>───────</div>
+            <div style={{color: state.status === 'voting' || state.status === 'done' ? '#ffaa00' : '#222', fontSize:'1.5rem'}}>🐺</div>
+            <div>───────</div>
+          </div>
+          <div style={{textAlign:'center' as const}}>
+            <div style={{color: state.votes.find(v=>v.agentId==='Cerberus-Head-2') ? '#00ff88' : '#333'}}>  /\_/\  </div>
+            <div style={{color: state.votes.find(v=>v.agentId==='Cerberus-Head-2') ? '#00ff88' : '#333'}}> ( o.o ) </div>
+            <div style={{color: state.votes.find(v=>v.agentId==='Cerberus-Head-2') ? '#00ff44' : '#333'}}> {">"} HEAD2 {"<"}</div>
+            <div style={{color:'#555', fontSize:'0.6rem'}}>⚖️ Validator A</div>
+          </div>
+          <div style={{textAlign:'center' as const, color:'#222', fontSize:'0.8rem', paddingBottom:'1rem'}}>│</div>
+          <div style={{textAlign:'center' as const}}>
+            <div style={{color: state.votes.find(v=>v.agentId==='Cerberus-Head-3') ? '#00ff88' : '#333'}}>  /\_/\  </div>
+            <div style={{color: state.votes.find(v=>v.agentId==='Cerberus-Head-3') ? '#00ff88' : '#333'}}> ( o.o ) </div>
+            <div style={{color: state.votes.find(v=>v.agentId==='Cerberus-Head-3') ? '#00ff44' : '#333'}}> {">"} HEAD3 {"<"}</div>
+            <div style={{color:'#555', fontSize:'0.6rem'}}>🛡️ Validator B</div>
+          </div>
+        </div>
+        <div style={{color:'#222', fontSize:'0.7rem', marginTop:'0.5rem'}}>
+          ══════════════ CONSENSUS ENGINE ══════════════
+        </div>
+        {state.result && (
+          <div style={{color: state.result.outcome==='EXECUTE'?'#00ff88':'#ff4444', fontSize:'0.8rem', fontWeight:700, marginTop:'0.25rem', letterSpacing:'0.2em'}}>
+            {state.result.outcome==='EXECUTE' ? '[ THREAT CONFIRMED — EXECUTING ]' : '[ THREAT DISCARDED ]'}
+          </div>
+        )}
+      </div>
+
       {/* Three Heads */}
       <div style={s.section}>
         <div style={s.label}>THREE HEADS OF CERBERUS</div>
