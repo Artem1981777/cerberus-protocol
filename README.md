@@ -88,3 +88,11 @@ Telegram: Artem00777
 Wallet: 0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD
 
 Built at ETHGlobal Open Agents 2026 - April 24 to May 3 2026
+
+
+## Contract Deployments
+
+| Network | Address |
+|---------|---------|
+| Ethereum Sepolia | 0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e |
+| 0G Galileo Testnet | 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30 |
