@@ -89,6 +89,15 @@ Wallet: 0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD
 
 Built at ETHGlobal Open Agents 2026 - April 24 to May 3 2026
 
+## Contact
+
+| | |
+|---|---|
+| Twitter/X | [@ArtemGromov777](https://twitter.com/ArtemGromov777) |
+| Telegram | [@Artem00777](https://t.me/Artem00777) |
+| GitHub | [@Artem1981777](https://github.com/Artem1981777) |
+| Wallet | 0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD |
+
 
 ## Contract Deployments
 
