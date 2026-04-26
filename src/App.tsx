@@ -48,6 +48,9 @@ export default function App() {
   const [apiKey, setApiKey] = useState('')
   const [threatCount, setThreatCount] = useState(0)
   const [totalScanned, setTotalScanned] = useState(0)
+  const [threatHistory, setThreatHistory] = useState<Array<{
+    id: string, severity: string, event: string, time: string, outcome: string, txHash: string
+  }>>([])
 
   const { isMonitoring, lastBlock, error: rpcError, startMonitoring, stopMonitoring, CONTRACT_ADDRESS } =
     useOnChainMonitor((event) => {
@@ -313,6 +316,96 @@ export default function App() {
           }
         </div>
       </div>
+
+      {/* Threat History */}
+      <div style={s.section}>
+        <div style={s.label}>THREAT HISTORY</div>
+        {state.result && state.currentProposal && (
+          <div style={{marginBottom:'0.5rem'}}>
+            {(() => {
+              const entry = {
+                id: state.currentProposal.id.slice(-8),
+                severity: state.currentProposal.severity,
+                event: state.currentProposal.eventType,
+                time: new Date(state.currentProposal.timestamp).toISOString(),
+                outcome: state.result.outcome,
+                txHash: state.currentProposal.txHash,
+                yes: state.result.yesCount,
+                no: state.result.noCount,
+              }
+              return (
+                <div style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'0.75rem', marginBottom:'0.5rem'}}>
+                  <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'0.4rem'}}>
+                    <span style={{fontSize:'0.8rem', color: entry.outcome==='EXECUTE'?'#00ff88':'#ff4444', fontWeight:700}}>
+                      {entry.outcome==='EXECUTE'?'✅':'❌'} {entry.event}
+                    </span>
+                    <span style={{fontSize:'0.65rem', color: entry.severity==='CRITICAL'?'#ff3300':entry.severity==='HIGH'?'#ff6600':'#ffaa00', fontWeight:700}}>
+                      {entry.severity}
+                    </span>
+                  </div>
+                  <div style={{display:'flex', gap:'1rem', fontSize:'0.65rem', color:'#444'}}>
+                    <span>ID: {entry.id}</span>
+                    <span>YES: {entry.yes} NO: {entry.no}</span>
+                    <span>{new Date(state.currentProposal.timestamp).toLocaleTimeString()}</span>
+                  </div>
+                  <div style={{marginTop:'0.4rem', display:'flex', gap:'1rem'}}>
+                    <a href={'https://sepolia.etherscan.io/tx/'+entry.txHash} target="_blank" rel="noopener noreferrer"
+                      style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none'}}>
+                      Etherscan ↗
+                    </a>
+                    <a href="https://storagescan.0g.ai" target="_blank" rel="noopener noreferrer"
+                      style={{fontSize:'0.65rem', color:'#ffaa00', textDecoration:'none'}}>
+                      0G Audit Log ↗
+                    </a>
+                  </div>
+                </div>
+              )
+            })()}
+          </div>
+        )}
+        {!state.currentProposal && (
+          <div style={{color:'#333', fontSize:'0.75rem'}}>[ No threats recorded yet ]</div>
+        )}
+      </div>
+
+      {/* Consensus Stats */}
+      {state.result && (
+        <div style={s.section}>
+          <div style={s.label}>CONSENSUS STATISTICS</div>
+          <div style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'1rem'}}>
+            <div style={{marginBottom:'0.75rem', fontSize:'0.75rem', color:'#888'}}>Vote Distribution</div>
+            <div style={{display:'flex', gap:'0.5rem', alignItems:'center', marginBottom:'0.5rem'}}>
+              <span style={{fontSize:'0.7rem', color:'#444', minWidth:60}}>YES</span>
+              <div style={{flex:1, background:'#1a1a1a', borderRadius:'2px', height:'16px', overflow:'hidden'}}>
+                <div style={{width: (state.result.yesCount / (state.result.yesCount + state.result.noCount + state.result.abstainCount || 1) * 100) + '%',
+                  background:'#00ff88', height:'100%', transition:'width 0.5s'}}/>
+              </div>
+              <span style={{fontSize:'0.7rem', color:'#00ff88', minWidth:20}}>{state.result.yesCount}</span>
+            </div>
+            <div style={{display:'flex', gap:'0.5rem', alignItems:'center', marginBottom:'0.5rem'}}>
+              <span style={{fontSize:'0.7rem', color:'#444', minWidth:60}}>NO</span>
+              <div style={{flex:1, background:'#1a1a1a', borderRadius:'2px', height:'16px', overflow:'hidden'}}>
+                <div style={{width: (state.result.noCount / (state.result.yesCount + state.result.noCount + state.result.abstainCount || 1) * 100) + '%',
+                  background:'#ff4444', height:'100%', transition:'width 0.5s'}}/>
+              </div>
+              <span style={{fontSize:'0.7rem', color:'#ff4444', minWidth:20}}>{state.result.noCount}</span>
+            </div>
+            <div style={{display:'flex', gap:'0.5rem', alignItems:'center'}}>
+              <span style={{fontSize:'0.7rem', color:'#444', minWidth:60}}>ABSTAIN</span>
+              <div style={{flex:1, background:'#1a1a1a', borderRadius:'2px', height:'16px', overflow:'hidden'}}>
+                <div style={{width: (state.result.abstainCount / (state.result.yesCount + state.result.noCount + state.result.abstainCount || 1) * 100) + '%',
+                  background:'#888', height:'100%', transition:'width 0.5s'}}/>
+              </div>
+              <span style={{fontSize:'0.7rem', color:'#888', minWidth:20}}>{state.result.abstainCount}</span>
+            </div>
+            <div style={{marginTop:'0.75rem', fontSize:'0.7rem', color:'#555'}}>
+              Threshold: 2/3 ({Math.round(2/3*100)}%) · 
+              Result: {Math.round(state.result.yesCount/(state.result.yesCount+state.result.noCount+state.result.abstainCount||1)*100)}% YES ·
+              Outcome: <span style={{color: state.result.outcome==='EXECUTE'?'#00ff88':'#ff4444', fontWeight:700}}>{state.result.outcome}</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Partner badges */}
       <div style={s.section}>
