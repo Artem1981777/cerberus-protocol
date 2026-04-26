@@ -330,6 +330,8 @@ export default function App() {
         <a href="https://github.com/Artem1981777/cerberus-protocol" style={{color:'#ff6600'}}>GitHub</a>
         {' '}·{' '}
         <a href="https://twitter.com/ArtemGromov777" style={{color:'#ff6600'}}>@ArtemGromov777</a>
+        {' '}·{' '}
+        <a href="https://sepolia.app.ens.domains/cerberusprotocol.eth" target="_blank" rel="noopener noreferrer" style={{color:'#00aaff'}}>cerberusprotocol.eth</a>
       </div>
     </div>
   )
