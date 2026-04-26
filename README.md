@@ -40,7 +40,7 @@ If 2/3 threshold met, KeeperHub executes on-chain action.
 
 ## Partner Integrations
 
-Gensyn: Three independent agents communicate without central coordinator.
+ENS: Each agent head has an ENS identity on Sepolia (cerberusprotocol.eth, watcher.cerberusprotocol.eth, validatora.cerberusprotocol.eth, validatorb.cerberusprotocol.eth). Agents are named, discoverable, and verifiable on-chain.
 KeeperHub: All on-chain actions delivered through KeeperHub execution layer.
 0G Labs: Every decision stored in 0G decentralized storage permanently.
 
