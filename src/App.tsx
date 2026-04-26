@@ -319,9 +319,9 @@ export default function App() {
         <div style={s.label}>POWERED BY</div>
         <div style={{display:'flex', gap:'1rem', flexWrap:'wrap' as const}}>
           {[
-            ['🔵', 'Gensyn', 'Decentralized Agent Network'],
             ['🟣', 'KeeperHub', 'On-chain Execution'],
             ['🟡', '0G Labs', 'Decentralized Storage'],
+            ['🔵', 'ENS', 'Agent Identity (cerberusprotocol.eth)'],
             ['⚡', 'Groq', 'AI Inference'],
             ['🔷', 'Alchemy', 'Blockchain RPC'],
           ].map(([emoji, name, desc]) => (
