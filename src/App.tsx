@@ -36,6 +36,12 @@ const STATUS_LABEL: Record<string, string> = {
 
 const HEADS = ['Cerberus-Head-1', 'Cerberus-Head-2', 'Cerberus-Head-3']
 
+const ENS_NAMES: Record<string, string> = {
+  'Cerberus-Head-1': 'watcher.cerberusprotocol.eth',
+  'Cerberus-Head-2': 'validatora.cerberusprotocol.eth',
+  'Cerberus-Head-3': 'validatorb.cerberusprotocol.eth',
+}
+
 export default function App() {
   const { state, runSwarm, reset } = useSwarmState()
   const [loading, setLoading] = useState(false)
@@ -172,6 +178,10 @@ export default function App() {
                 <div style={{fontSize:'0.7rem', color, letterSpacing:'0.1em', marginBottom:'0.25rem',
                   animation: pulse ? 'none' : undefined}}>{lbl}</div>
                 <div style={{fontSize:'0.65rem', color:'#555'}}>{i === 0 ? 'Watcher' : i === 1 ? 'Validator A' : 'Validator B'}</div>
+                <a href={'https://sepolia.app.ens.domains/' + ENS_NAMES[id]} target="_blank" rel="noopener noreferrer"
+                  style={{fontSize:'0.6rem', color:'#00aaff', textDecoration:'none', marginTop:'0.25rem', display:'block'}}>
+                  {ENS_NAMES[id]} ↗
+                </a>
                 {vote && <div style={{fontSize:'0.6rem', color:'#666', marginTop:'0.4rem', lineHeight:1.4}}>{vote.reasoning.slice(0, 80)}...</div>}
               </div>
             )
