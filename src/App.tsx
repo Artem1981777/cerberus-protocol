@@ -407,6 +407,39 @@ export default function App() {
         </div>
       )}
 
+      {/* ENS Agent Directory */}
+      <div style={s.section}>
+        <div style={s.label}>ENS AGENT DIRECTORY</div>
+        <div style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'1rem'}}>
+          <div style={{fontSize:'0.7rem', color:'#888', marginBottom:'0.75rem'}}>
+            Each Cerberus agent has a verifiable ENS identity on Sepolia
+          </div>
+          {[
+            {name:'watcher.cerberusprotocol.eth', role:'👁 WatcherAgent', color:'#ff6600'},
+            {name:'validatora.cerberusprotocol.eth', role:'⚖️ ValidatorAgent-A', color:'#00ff88'},
+            {name:'validatorb.cerberusprotocol.eth', role:'🛡️ ValidatorAgent-B', color:'#00ff88'},
+          ].map(agent => (
+            <div key={agent.name} style={{display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0.4rem 0', borderBottom:'1px solid #1a1a1a'}}>
+              <span style={{fontSize:'0.7rem', color:agent.color}}>{agent.role}</span>
+              <a href={'https://sepolia.app.ens.domains/'+agent.name} target="_blank" rel="noopener noreferrer"
+                style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none'}}>
+                {agent.name} ↗
+              </a>
+            </div>
+          ))}
+          <div style={{marginTop:'0.75rem', display:'flex', gap:'0.75rem'}}>
+            <a href="https://cerberus-protocol.vercel.app/api/ens-lookup" target="_blank" rel="noopener noreferrer"
+              style={{fontSize:'0.65rem', color:'#ffaa00', textDecoration:'none', border:'1px solid #333', padding:'0.3rem 0.6rem', borderRadius:'3px'}}>
+              🔍 Live ENS Lookup API ↗
+            </a>
+            <a href="https://sepolia.app.ens.domains/cerberusprotocol.eth" target="_blank" rel="noopener noreferrer"
+              style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none', border:'1px solid #333', padding:'0.3rem 0.6rem', borderRadius:'3px'}}>
+              🌐 cerberusprotocol.eth ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Partner badges */}
       <div style={s.section}>
         <div style={s.label}>POWERED BY</div>
