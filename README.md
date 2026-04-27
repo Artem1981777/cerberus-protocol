@@ -145,3 +145,15 @@ cerberusprotocol.eth is registered on Sepolia with full on-chain profile:
 - Twitter: ArtemGromov777
 - Agent subnames: watcher.cerberusprotocol.eth, validatora.cerberusprotocol.eth, validatorb.cerberusprotocol.eth
 - View profile: https://sepolia.app.ens.domains/cerberusprotocol.eth
+
+## ENS On-Chain Agent Credentials
+
+Each Cerberus agent has verifiable on-chain credentials stored in ENS text records on Sepolia:
+
+| Agent | ENS Name | Capabilities |
+|-------|----------|-------------|
+| Head-1 Watcher | watcher.cerberusprotocol.eth | threat-detection, consensus-proposal, on-chain-monitoring |
+| Head-2 Validator | validatora.watcher.cerberusprotocol.eth | threat-validation, consensus-voting, independent-analysis |
+| Head-3 Validator | validatorb.validatora.watcher.cerberusprotocol.eth | threat-validation, consensus-voting, independent-analysis |
+
+Text records stored on-chain — verifiable at sepolia.app.ens.domains
