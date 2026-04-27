@@ -460,7 +460,6 @@ export default function App() {
             ['⚡', 'Groq', 'AI Inference'],
             ['🔷', 'Alchemy', 'Blockchain RPC'],
             ['📱', 'Telegram', 'Real-time Agent Alerts'],
-            ['📱', 'Telegram', 'Real-time Agent Alerts'],
           ].map(([emoji, name, desc]) => (
             <div key={name} style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'0.5rem 0.75rem', fontSize:'0.7rem'}}>
               <span>{emoji}</span>
