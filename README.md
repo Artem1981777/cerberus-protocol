@@ -99,6 +99,37 @@ Built at ETHGlobal Open Agents 2026 - April 24 to May 3 2026
 | Wallet | 0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD |
 
 
+
+## 0G Agent Coordination (for 0G Swarms Prize)
+
+Cerberus Protocol implements the specialist agent swarm pattern on 0G:
+
+### How Agents Communicate and Coordinate
+
+1. **WatcherAgent (Cerberus-Head-1)** detects on-chain threat and creates ThreatProposal
+2. **Proposal stored in 0G Storage** as shared memory — both validators read from same source
+3. **ValidatorAgent-A and ValidatorAgent-B** independently fetch proposal from 0G and cast votes
+4. **ConsensusEngine** reads all votes from 0G shared memory, evaluates 2/3 threshold
+5. **ExecutorAgent** writes final ConsensusResult back to 0G as immutable audit log
+
+### 0G Storage as Shared Agent Memory
+
+Every consensus round writes to 0G:
+- Proposal data (threat evidence, severity, tx hash)
+- Each agent vote (agent ID, vote, reasoning)
+- Final outcome (EXECUTE/DISCARD, timestamps)
+- Verifiable on storagescan.0g.ai
+
+This implements the pattern: agents collaborate via shared 0G Storage memory.
+
+### Contract Deployments
+- Ethereum Sepolia: 0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e
+- 0G Galileo Testnet: 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30
+
+### Team Contact
+- Telegram: @Artem00777
+- Twitter/X: @ArtemGromov777
+- GitHub: @Artem1981777
 ## Contract Deployments
 
 | Network | Address |
