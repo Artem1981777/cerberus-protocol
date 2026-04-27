@@ -11,17 +11,24 @@ export default async function handler(req, res) {
   try {
     const { severity, evidence, txHash, proposalId, yesCount } = req.body
 
-    const message = `🐺 CERBERUS ALERT
+    const message = `🐺 CERBERUS PROTOCOL ALERT
 
-⚠️ Threat detected on Sepolia
+🚨 Threat confirmed by AI swarm consensus
+
 🔴 Severity: ${severity || 'CRITICAL'}
 📋 Evidence: ${evidence || 'Suspicious activity detected'}
-✅ Consensus: ${yesCount || 2}/3 YES — EXECUTED
-🔗 TX: ${txHash ? txHash.slice(0,20) + '...' : 'N/A'}
-📌 ID: ${proposalId || 'N/A'}
 
-⚡ KeeperHub alerted
-🗄️ 0G audit written
+🤖 Agent Consensus:
+  👁 watcher.cerberusprotocol.eth — DETECTED
+  ⚖️ validatora.watcher.cerberusprotocol.eth — YES
+  🛡️ validatorb.validatora.watcher.cerberusprotocol.eth — YES
+  ✅ Result: ${yesCount || 2}/3 YES — EXECUTED
+
+🔗 TX: ${txHash ? txHash.slice(0,18) + '...' : 'N/A'}
+📌 Proposal: ${proposalId ? proposalId.slice(-12) : 'N/A'}
+
+⚡ KeeperHub executed
+🗄️ 0G audit stored
 🌐 cerberus-protocol.vercel.app`
 
     const response = await fetch(
