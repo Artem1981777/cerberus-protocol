@@ -461,6 +461,10 @@ export default function App() {
               style={{fontSize:'0.65rem', color:'#ffaa00', textDecoration:'none', border:'1px solid #333', padding:'0.3rem 0.6rem', borderRadius:'3px'}}>
               🔍 Live ENS Lookup API ↗
             </a>
+            <a href="https://cerberus-protocol.vercel.app/api/status" target="_blank" rel="noopener noreferrer"
+              style={{fontSize:'0.65rem', color:'#00ff88', textDecoration:'none', border:'1px solid #333', padding:'0.3rem 0.6rem', borderRadius:'3px'}}>
+              ⚡ System Status API ↗
+            </a>
             <a href="https://sepolia.app.ens.domains/cerberusprotocol.eth" target="_blank" rel="noopener noreferrer"
               style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none', border:'1px solid #333', padding:'0.3rem 0.6rem', borderRadius:'3px'}}>
               🌐 cerberusprotocol.eth ↗
