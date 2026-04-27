@@ -49,6 +49,7 @@ export default function App() {
   const [threatCount, setThreatCount] = useState(0)
   const [totalScanned, setTotalScanned] = useState(0)
   const [keeperRuns, setKeeperRuns] = useState(0)
+  const [customContract, setCustomContract] = useState('')
   const [allThreats, setAllThreats] = useState<Array<{
     id: string, severity: string, event: string, time: string,
     outcome: string, txHash: string, yes: number, no: number
@@ -286,6 +287,24 @@ export default function App() {
       {/* Live Monitor */}
       <div style={s.section}>
         <div style={s.label}>LIVE ON-CHAIN MONITOR · ETHEREUM SEPOLIA</div>
+        <div style={{marginBottom:'0.75rem'}}>
+          <div style={{fontSize:'0.65rem', color:'#444', marginBottom:'0.3rem'}}>MONITOR ANY CONTRACT ADDRESS</div>
+          <div style={{display:'flex', gap:'0.5rem'}}>
+            <input
+              type="text"
+              placeholder="0x... paste any Sepolia contract address"
+              value={customContract}
+              onChange={e => setCustomContract(e.target.value)}
+              style={{...s.input, color:'#00aaff', flex:1, fontSize:'0.75rem'}}
+            />
+            {customContract && (
+              <button onClick={() => setCustomContract('')}
+                style={{background:'transparent', border:'1px solid #333', color:'#555', padding:'0.3rem 0.6rem', cursor:'pointer', fontFamily:'monospace', fontSize:'0.7rem', borderRadius:'4px'}}>
+                RESET
+              </button>
+            )}
+          </div>
+        </div>
         <div style={{display:'flex', gap:'0.75rem', alignItems:'center', flexWrap:'wrap' as const, marginBottom:'0.5rem'}}>
           <button
             onClick={isMonitoring ? stopMonitoring : startMonitoring}
@@ -297,10 +316,11 @@ export default function App() {
         </div>
         <div style={{fontSize:'0.65rem', color:'#444'}}>
           Monitoring:{' '}
-          <a href={etherscanBase + '/address/' + CONTRACT_ADDRESS} target="_blank" rel="noopener noreferrer"
+          <a href={etherscanBase + '/address/' + (customContract || CONTRACT_ADDRESS)} target="_blank" rel="noopener noreferrer"
             style={{color:'#555', textDecoration:'none'}}>
-            {CONTRACT_ADDRESS} ↗
+            {(customContract || CONTRACT_ADDRESS).slice(0,20)}... ↗
           </a>
+          {customContract && <span style={{color:'#00aaff', marginLeft:'0.5rem'}}>[ custom contract ]</span>}
         </div>
       </div>
 
