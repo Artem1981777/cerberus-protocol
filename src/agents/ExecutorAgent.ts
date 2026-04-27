@@ -18,10 +18,27 @@ export async function executeConsensus(
     result.executedAt = Date.now()
     await Promise.all([
       triggerKeeperHub(proposal),
-      writeToOG(proposal, result)
+      writeToOG(proposal, result),
+      sendTelegramAlert(proposal, result),
     ])
   }
   return result
+}
+
+async function sendTelegramAlert(proposal: ThreatProposal, result: ConsensusResult): Promise<void> {
+  try {
+    await fetch('/api/telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        severity: proposal.severity,
+        evidence: proposal.evidence,
+        txHash: proposal.txHash,
+        proposalId: proposal.id,
+        yesCount: result.yesCount,
+      })
+    })
+  } catch (e) { console.error('Telegram error:', e) }
 }
 
 async function triggerKeeperHub(proposal: ThreatProposal): Promise<void> {
