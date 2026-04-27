@@ -105,3 +105,12 @@ Built at ETHGlobal Open Agents 2026 - April 24 to May 3 2026
 |---------|---------|
 | Ethereum Sepolia | 0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e |
 | 0G Galileo Testnet | 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30 |
+
+## ENS Profile
+
+cerberusprotocol.eth is registered on Sepolia with full on-chain profile:
+- Website: https://cerberus-protocol.vercel.app
+- GitHub: Artem1981777
+- Twitter: ArtemGromov777
+- Agent subnames: watcher.cerberusprotocol.eth, validatora.cerberusprotocol.eth, validatorb.cerberusprotocol.eth
+- View profile: https://sepolia.app.ens.domains/cerberusprotocol.eth
