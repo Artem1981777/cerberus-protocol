@@ -157,3 +157,26 @@ Each Cerberus agent has verifiable on-chain credentials stored in ENS text recor
 | Head-3 Validator | validatorb.validatora.watcher.cerberusprotocol.eth | threat-validation, consensus-voting, independent-analysis |
 
 Text records stored on-chain — verifiable at sepolia.app.ens.domains
+
+## Live API Endpoints
+
+All endpoints are publicly accessible:
+
+| Endpoint | Description |
+|----------|-------------|
+| [/api/status](https://cerberus-protocol.vercel.app/api/status) | System health + all integrations |
+| [/api/ens-lookup](https://cerberus-protocol.vercel.app/api/ens-lookup) | All agent ENS profiles |
+| [/api/ens-resolve?name=Cerberus-Head-1](https://cerberus-protocol.vercel.app/api/ens-resolve?name=Cerberus-Head-1) | Resolve agent by ID |
+| [/api/keeperhub](https://cerberus-protocol.vercel.app/api/keeperhub) | KeeperHub integration status |
+
+## How It Works — Step by Step
+
+1. WatcherAgent (cerberus-head-1) polls Sepolia every 5 seconds
+2. Suspicious event detected → AI analyzes via Groq llama-3.3-70b
+3. ThreatProposal created with severity, evidence, tx hash
+4. ValidatorAgent-A and ValidatorAgent-B receive proposal independently
+5. Each validator makes separate AI call — no shared context
+6. Votes collected: YES/NO/ABSTAIN
+7. ConsensusEngine evaluates: 2/3 threshold required
+8. If EXECUTE: KeeperHub webhook triggered + 0G audit written + Telegram alert sent
+9. All agent identities verified via ENS on Sepolia
