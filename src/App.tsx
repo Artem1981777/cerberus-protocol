@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSwarmState } from './hooks/useSwarmState'
 import { useOnChainMonitor } from './hooks/useOnChainMonitor'
 import { OnChainEvent } from './agents/WatcherAgent'
@@ -48,9 +48,36 @@ export default function App() {
   const [apiKey, setApiKey] = useState('')
   const [threatCount, setThreatCount] = useState(0)
   const [totalScanned, setTotalScanned] = useState(0)
+  const [keeperRuns, setKeeperRuns] = useState(0)
+  const [allThreats, setAllThreats] = useState<Array<{
+    id: string, severity: string, event: string, time: string,
+    outcome: string, txHash: string, yes: number, no: number
+  }>>([])
   const [threatHistory, setThreatHistory] = useState<Array<{
     id: string, severity: string, event: string, time: string, outcome: string, txHash: string
   }>>([])
+
+  // Накапливаем историю угроз
+  useEffect(() => {
+    if (state.status === 'done' && state.result && state.currentProposal) {
+      const entry = {
+        id: state.currentProposal.id,
+        severity: state.currentProposal.severity,
+        event: state.currentProposal.eventType,
+        time: new Date().toLocaleTimeString(),
+        outcome: state.result.outcome,
+        txHash: state.currentProposal.txHash,
+        yes: state.result.yesCount,
+        no: state.result.noCount,
+      }
+      setAllThreats(prev => {
+        const exists = prev.find(t => t.id === entry.id)
+        if (exists) return prev
+        if (entry.outcome === 'EXECUTE') setKeeperRuns(n => n + 1)
+        return [entry, ...prev]
+      })
+    }
+  }, [state.status, state.result])
 
   const { isMonitoring, lastBlock, error: rpcError, startMonitoring, stopMonitoring, CONTRACT_ADDRESS } =
     useOnChainMonitor((event) => {
@@ -98,8 +125,8 @@ export default function App() {
           <div style={s.statLabel}>EVENTS SCANNED</div>
         </div>
         <div style={s.statBox}>
-          <div style={{...s.statNum, color: '#00ff88'}}>{state.result?.outcome === 'EXECUTE' ? '1' : '0'}</div>
-          <div style={s.statLabel}>ACTIONS EXECUTED</div>
+          <div style={{...s.statNum, color: '#00ff88'}}>{keeperRuns}</div>
+          <div style={s.statLabel}>KEEPER RUNS</div>
         </div>
         <div style={s.statBox}>
           <div style={{...s.statNum, color: '#00aaff'}}>{isMonitoring ? 'LIVE' : 'OFF'}</div>
@@ -319,53 +346,35 @@ export default function App() {
 
       {/* Threat History */}
       <div style={s.section}>
-        <div style={s.label}>THREAT HISTORY</div>
-        {state.result && state.currentProposal && (
-          <div style={{marginBottom:'0.5rem'}}>
-            {(() => {
-              const entry = {
-                id: state.currentProposal.id.slice(-8),
-                severity: state.currentProposal.severity,
-                event: state.currentProposal.eventType,
-                time: new Date(state.currentProposal.timestamp).toISOString(),
-                outcome: state.result.outcome,
-                txHash: state.currentProposal.txHash,
-                yes: state.result.yesCount,
-                no: state.result.noCount,
-              }
-              return (
-                <div style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'0.75rem', marginBottom:'0.5rem'}}>
-                  <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'0.4rem'}}>
-                    <span style={{fontSize:'0.8rem', color: entry.outcome==='EXECUTE'?'#00ff88':'#ff4444', fontWeight:700}}>
-                      {entry.outcome==='EXECUTE'?'✅':'❌'} {entry.event}
-                    </span>
-                    <span style={{fontSize:'0.65rem', color: entry.severity==='CRITICAL'?'#ff3300':entry.severity==='HIGH'?'#ff6600':'#ffaa00', fontWeight:700}}>
-                      {entry.severity}
-                    </span>
-                  </div>
-                  <div style={{display:'flex', gap:'1rem', fontSize:'0.65rem', color:'#444'}}>
-                    <span>ID: {entry.id}</span>
-                    <span>YES: {entry.yes} NO: {entry.no}</span>
-                    <span>{new Date(state.currentProposal.timestamp).toLocaleTimeString()}</span>
-                  </div>
-                  <div style={{marginTop:'0.4rem', display:'flex', gap:'1rem'}}>
-                    <a href={'https://sepolia.etherscan.io/tx/'+entry.txHash} target="_blank" rel="noopener noreferrer"
-                      style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none'}}>
-                      Etherscan ↗
-                    </a>
-                    <a href="https://storagescan.0g.ai" target="_blank" rel="noopener noreferrer"
-                      style={{fontSize:'0.65rem', color:'#ffaa00', textDecoration:'none'}}>
-                      0G Audit Log ↗
-                    </a>
-                  </div>
-                </div>
-              )
-            })()}
+        <div style={s.label}>THREAT HISTORY · SESSION LOG</div>
+        {allThreats.length === 0 && (
+          <div style={{color:'#333', fontSize:'0.75rem'}}>[ No threats recorded yet — simulate an event above ]</div>
+        )}
+        {allThreats.map((entry, i) => (
+          <div key={i} style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'0.75rem', marginBottom:'0.5rem'}}>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'0.4rem'}}>
+              <span style={{fontSize:'0.8rem', color: entry.outcome==='EXECUTE'?'#00ff88':'#ff4444', fontWeight:700}}>
+                {entry.outcome==='EXECUTE'?'✅':'❌'} {entry.event}
+              </span>
+              <span style={{fontSize:'0.65rem', color: entry.severity==='CRITICAL'?'#ff3300':entry.severity==='HIGH'?'#ff6600':'#ffaa00', fontWeight:700}}>
+                {entry.severity}
+              </span>
+            </div>
+            <div style={{display:'flex', gap:'1rem', fontSize:'0.65rem', color:'#444', flexWrap:'wrap' as const}}>
+              <span>#{allThreats.length - i}</span>
+              <span>YES: {entry.yes} NO: {entry.no}</span>
+              <span>{entry.time}</span>
+            </div>
+            <div style={{marginTop:'0.4rem', display:'flex', gap:'1rem'}}>
+              <a href={'https://sepolia.etherscan.io/tx/'+entry.txHash} target="_blank" rel="noopener noreferrer"
+                style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none'}}>Etherscan ↗</a>
+              <a href="https://storagescan.0g.ai" target="_blank" rel="noopener noreferrer"
+                style={{fontSize:'0.65rem', color:'#ffaa00', textDecoration:'none'}}>0G Audit ↗</a>
+              <a href={'https://sepolia.app.ens.domains/cerberusprotocol.eth'} target="_blank" rel="noopener noreferrer"
+                style={{fontSize:'0.65rem', color:'#00aaff', textDecoration:'none'}}>ENS ↗</a>
+            </div>
           </div>
-        )}
-        {!state.currentProposal && (
-          <div style={{color:'#333', fontSize:'0.75rem'}}>[ No threats recorded yet ]</div>
-        )}
+        ))}
       </div>
 
       {/* Consensus Stats */}
