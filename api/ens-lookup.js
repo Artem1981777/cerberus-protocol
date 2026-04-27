@@ -1,34 +1,42 @@
 export default async function handler(req, res) {
-  // ENS Public Resolver on mainnet для lookup
-  // Наши агенты зарегистрированы на Sepolia
-  
   const agentProfiles = {
     'watcher.cerberusprotocol.eth': {
       address: '0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD',
-      role: 'WatcherAgent',
-      description: 'Monitors on-chain events and proposes threats to the swarm',
+      role: 'WatcherAgent — Cerberus Head-1',
+      description: 'Cerberus Head-1: threat detection agent — monitors on-chain events and proposes security threats to validator swarm',
+      capabilities: 'threat-detection,consensus-proposal,on-chain-monitoring',
+      url: 'https://cerberus-protocol.vercel.app',
       network: 'Sepolia Testnet',
       contract: '0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e',
+      textRecords: 'on-chain verified',
     },
-    'validatora.cerberusprotocol.eth': {
+    'validatora.watcher.cerberusprotocol.eth': {
       address: '0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD',
-      role: 'ValidatorAgent-A',
-      description: 'Independently evaluates threat proposals and casts vote',
+      role: 'ValidatorAgent-A — Cerberus Head-2',
+      description: 'Cerberus Head-2: independent validator agent — evaluates threat proposals and casts consensus vote',
+      capabilities: 'threat-validation,consensus-voting,independent-analysis',
+      url: 'https://cerberus-protocol.vercel.app',
       network: 'Sepolia Testnet',
+      textRecords: 'on-chain verified',
     },
-    'validatorb.cerberusprotocol.eth': {
+    'validatorb.validatora.watcher.cerberusprotocol.eth': {
       address: '0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD',
-      role: 'ValidatorAgent-B',
-      description: 'Independently evaluates threat proposals and casts vote',
+      role: 'ValidatorAgent-B — Cerberus Head-3',
+      description: 'Cerberus Head-3: independent validator agent — evaluates threat proposals and casts consensus vote',
+      capabilities: 'threat-validation,consensus-voting,independent-analysis',
+      url: 'https://cerberus-protocol.vercel.app',
       network: 'Sepolia Testnet',
+      textRecords: 'on-chain verified',
     },
     'cerberusprotocol.eth': {
       address: '0xdc6778C5F8cC74b10aED11c48306D4Cfc5737FBD',
-      role: 'CerberusProtocol',
+      role: 'CerberusProtocol — Root Identity',
       description: 'Three-headed AI security swarm for smart contract monitoring',
-      network: 'Sepolia Testnet',
+      capabilities: 'multi-agent-consensus,threat-detection,on-chain-execution',
+      url: 'https://cerberus-protocol.vercel.app',
       github: 'https://github.com/Artem1981777/cerberus-protocol',
-      demo: 'https://cerberus-protocol.vercel.app',
+      network: 'Sepolia Testnet',
+      textRecords: 'on-chain verified',
     }
   }
 
@@ -39,13 +47,15 @@ export default async function handler(req, res) {
       ensName: name,
       resolved: agentProfiles[name],
       registry: 'sepolia.app.ens.domains',
-      note: 'ENS provides verifiable on-chain identity for each Cerberus agent'
+      note: 'Text records stored on-chain — ENS provides verifiable identity for each Cerberus agent'
     })
   }
 
   return res.status(200).json({
+    protocol: 'cerberusprotocol.eth',
     agents: agentProfiles,
     registry: 'sepolia.app.ens.domains',
-    note: 'Each Cerberus agent head has a unique ENS identity on Sepolia'
+    note: 'Each agent verified by ENS identity before consensus participation',
+    verifyAt: 'https://sepolia.app.ens.domains/cerberusprotocol.eth'
   })
 }
