@@ -123,7 +123,7 @@ Every consensus round writes to 0G:
 This implements the pattern: agents collaborate via shared 0G Storage memory.
 
 ### Contract Deployments
-- Ethereum Sepolia: 0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e
+- Ethereum Sepolia: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
 - 0G Galileo Testnet: 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30
 
 ### Team Contact
@@ -134,7 +134,7 @@ This implements the pattern: agents collaborate via shared 0G Storage memory.
 
 | Network | Address |
 |---------|---------|
-| Ethereum Sepolia | 0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e |
+| Ethereum Sepolia | 0x23d58937a7101d015e41525d00f6bfc3dd69a226 |
 | 0G Galileo Testnet | 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30 |
 
 ## ENS Profile

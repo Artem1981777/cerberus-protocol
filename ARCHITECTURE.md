@@ -162,7 +162,7 @@ Every consensus result is logged to 0G decentralized storage:
 
 - Network: Ethereum Sepolia Testnet
 - RPC: Alchemy (eth-sepolia.g.alchemy.com)
-- Contract: 0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e
+- Contract: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
 - Events monitored:
   - SuspiciousActivity (topic: 0x40922f...)
   - Withdrawal (topic: 0xe1fffc...)

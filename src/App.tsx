@@ -6,21 +6,21 @@ import { OnChainEvent } from './agents/WatcherAgent'
 const DEMO_EVENTS: OnChainEvent[] = [
   {
     txHash: '0xabc123def456789abcdef1234567890abcdef1234567890abcdef1234567890ab',
-    contractAddress: '0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e',
+    contractAddress: '0x23d58937a7101d015e41525d00f6bfc3dd69a226',
     eventName: 'SuspiciousActivity',
     args: { actor: '0xDeadBeef', reason: 'Unauthorized withdrawal attempt' },
     blockNumber: 10684521,
   },
   {
     txHash: '0x999aaabbbccc111222333444555666777888999aaabbbccc111222333444555666',
-    contractAddress: '0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e',
+    contractAddress: '0x23d58937a7101d015e41525d00f6bfc3dd69a226',
     eventName: 'Withdrawal',
     args: { to: '0xUnknown999', amount: '99000000000000000000' },
     blockNumber: 10684599,
   },
   {
     txHash: '0x111aaa222bbb333ccc444ddd555eee666fff777888999000aaa111bbb222ccc33',
-    contractAddress: '0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e',
+    contractAddress: '0x23d58937a7101d015e41525d00f6bfc3dd69a226',
     eventName: 'Deposit',
     args: { from: '0xRegularUser', amount: '1000000000000000000' },
     blockNumber: 10684610,

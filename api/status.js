@@ -57,7 +57,7 @@ export default async function handler(req, res) {
       blockchain: {
         network: 'Ethereum Sepolia',
         rpc: 'Alchemy',
-        contract: '0xc4a1367dbaf887387598991bfcf54d9cfdd10a9e',
+        contract: '0x23d58937a7101d015e41525d00f6bfc3dd69a226',
         pollInterval: '5s',
         description: 'Live on-chain event monitoring'
       }
