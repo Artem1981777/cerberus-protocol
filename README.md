@@ -185,3 +185,28 @@ All endpoints are publicly accessible:
 7. ConsensusEngine evaluates: 2/3 threshold required
 8. If EXECUTE: KeeperHub webhook triggered + 0G audit written + Telegram alert sent
 9. All agent identities verified via ENS on Sepolia
+
+## Real On-Chain Execution Proof
+
+KeeperHub executed emergencyPause() on TestTarget contract:
+- TX: 0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
+- Contract: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
+- Etherscan: https://sepolia.etherscan.io/tx/0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
+
+## Telegram Alerts
+Real-time alerts via @cerberus_protocol_bot on every EXECUTE decision.
+Each alert includes ENS agent names, evidence, TX hash.
+
+## ENS On-Chain Credentials
+- watcher.cerberusprotocol.eth: capabilities=threat-detection,consensus-proposal
+- validatora.watcher.cerberusprotocol.eth: capabilities=threat-validation,consensus-voting
+- validatorb.validatora.watcher.cerberusprotocol.eth: capabilities=threat-validation,consensus-voting
+
+## Live API
+- /api/status — system health
+- /api/ens-lookup — agent profiles
+- /api/keeperhub — integration status
+
+## Contact
+- Twitter: ArtemGromov777
+- Telegram: Artem00777
