@@ -36,6 +36,11 @@ async function sendTelegramAlert(proposal: ThreatProposal, result: ConsensusResu
         txHash: proposal.txHash,
         proposalId: proposal.id,
         yesCount: result.yesCount,
+        votes: result.votes.map(v => ({
+          agentId: v.agentId,
+          vote: v.vote,
+          reasoning: v.reasoning
+        })),
       })
     })
   } catch (e) { console.error('Telegram error:', e) }
