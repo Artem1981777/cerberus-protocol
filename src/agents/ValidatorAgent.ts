@@ -1,4 +1,3 @@
-
 import { ThreatProposal, AgentVote, Vote } from '../consensus/ConsensusEngine'
 
 export async function validateProposal(
@@ -7,6 +6,31 @@ export async function validateProposal(
   apiKey?: string
 ): Promise<AgentVote> {
   try {
+    const systemPrompt = `You are ${agentId}, an independent security validator in the Cerberus Protocol swarm.
+
+Your role: Critically evaluate threat proposals from WatcherAgent. Be skeptical but accurate.
+
+VOTING RULES:
+- Vote YES if: evidence is clear, severity matches event type, threat is credible
+- Vote NO if: false positive, normal activity misclassified, insufficient evidence  
+- Vote ABSTAIN if: unclear or insufficient data
+
+CRITICAL threats (SuspiciousActivity, unauthorized access) - strongly consider YES
+HIGH threats (large withdrawals, ownership changes) - evaluate carefully
+Anti-collusion: Make your decision INDEPENDENTLY.
+
+Respond ONLY with valid JSON, no markdown:
+{"vote": "YES", "reasoning": "2-3 sentence analysis", "confidence": "HIGH", "keyFactor": "main reason"}`
+
+    const userMsg = `Evaluate this threat:
+Event: ${proposal.eventType}
+Severity: ${proposal.severity}
+Evidence: ${proposal.evidence}
+Proposed by: ${proposal.proposedBy}
+TX: ${proposal.txHash}
+
+Cast your independent vote.`
+
     const res = await fetch('/api/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -14,8 +38,8 @@ export async function validateProposal(
         apiKey: apiKey || '',
         model: 'claude-sonnet-4-5-20251001',
         max_tokens: 200,
-        system: 'You are ' + agentId + ', an independent security validator in Cerberus Protocol. Evaluate threat proposals critically. Respond ONLY with valid JSON: {"vote":"YES","reasoning":"explanation"}. Vote YES for CRITICAL/HIGH severity events.',
-        messages: [{ role: 'user', content: 'Vote on: Event=' + proposal.eventType + ' Severity=' + proposal.severity + ' Evidence=' + proposal.evidence }]
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userMsg }]
       })
     })
     const data = await res.json()
@@ -32,7 +56,7 @@ export async function validateProposal(
     return {
       agentId,
       vote: proposal.severity === 'CRITICAL' ? 'YES' : 'ABSTAIN',
-      reasoning: proposal.severity === 'CRITICAL' ? 'CRITICAL threat confirmed' : 'Unable to evaluate',
+      reasoning: proposal.severity === 'CRITICAL' ? 'CRITICAL threat — voting YES' : 'Unable to evaluate',
       timestamp: Date.now()
     }
   }
