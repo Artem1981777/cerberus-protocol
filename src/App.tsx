@@ -213,7 +213,7 @@ export default function App() {
                   style={{fontSize:'0.6rem', color:'#00aaff', textDecoration:'none', marginTop:'0.25rem', display:'block'}}>
                   {ENS_NAMES[id]} ↗
                 </a>
-                {vote && <div style={{fontSize:'0.6rem', color:'#666', marginTop:'0.4rem', lineHeight:1.4}}>{vote.reasoning.slice(0, 80)}...</div>}
+                {vote && <div style={{fontSize:'0.6rem', color:'#666', marginTop:'0.4rem', lineHeight:1.4}}>{vote.reasoning.slice(0, 120)}{vote.reasoning.length > 120 ? '...' : ''}</div>}
               </div>
             )
           })}
