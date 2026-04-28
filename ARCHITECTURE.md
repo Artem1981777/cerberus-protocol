@@ -229,3 +229,15 @@ LayerZero x Stellar audit: High severity finding (DVN replay attack)
 
 Built at ETHGlobal Open Agents 2026
 April 24 – May 3, 2026
+
+## Proof of Real On-Chain Execution
+
+KeeperHub successfully executed emergencyPause() on TestTarget contract:
+- TX Hash: 0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
+- Contract: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
+- Network: Ethereum Sepolia
+- Function: emergencyPause("Cerberus consensus executed")
+- Result: Contract paused on-chain
+- Etherscan: https://sepolia.etherscan.io/tx/0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
+
+This proves Cerberus Protocol executes REAL on-chain protective actions, not simulations.
