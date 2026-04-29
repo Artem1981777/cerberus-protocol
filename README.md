@@ -265,3 +265,19 @@ emergencyPause() called on CerberusVault:
 - TX: 0xa662a295baeca12a91...
 - Result: Vault paused, funds protected
 - Etherscan: https://sepolia.etherscan.io/tx/0xa662a295baeca12a91...
+
+## CerberusGuard — Meta-Protection Layer
+
+Who watches the watchmen? Cerberus does.
+
+CerberusGuard monitors Cerberus Protocol itself — a second layer of AI security:
+
+- **Contract:** 0x7ff52e1adb963e226dc11e1be0c1346019da75c4
+- **Etherscan:** https://sepolia.etherscan.io/address/0x7ff52e1adb963e226dc11e1be0c1346019da75c4
+- **Monitors:** CerberusVault (0x6eb6fde2d2462b0afa9f169372677fd69955bad8)
+
+Protection layers:
+- Layer 1: Cerberus Protocol monitors CerberusVault
+- Layer 2: CerberusGuard monitors Cerberus Protocol itself
+
+If Cerberus is compromised — CerberusGuard detects and responds.
