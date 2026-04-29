@@ -473,6 +473,56 @@ export default function App() {
         </div>
       </div>
 
+      {/* Protection Layers */}
+      <div style={s.section}>
+        <div style={s.label}>CERBERUS PROTECTION LAYERS</div>
+        <div style={{background:'#111', border:'1px solid #1a1a1a', borderRadius:'4px', padding:'1rem'}}>
+          <div style={{fontSize:'0.7rem', color:'#555', marginBottom:'0.75rem', fontStyle:'italic'}}>
+            "Who watches the watchmen? Cerberus does."
+          </div>
+          <div style={{display:'flex', flexDirection:'column' as const, gap:'0.5rem'}}>
+            <div style={{display:'flex', alignItems:'center', gap:'0.75rem', padding:'0.5rem', background:'#0d0d0d', borderRadius:'4px', border:'1px solid #ff660022'}}>
+              <span style={{fontSize:'1rem'}}>🏛️</span>
+              <div style={{flex:1}}>
+                <div style={{fontSize:'0.75rem', color:'#ff6600', fontWeight:700}}>Layer 2 — CerberusGuard</div>
+                <div style={{fontSize:'0.65rem', color:'#555'}}>Monitors Cerberus Protocol itself</div>
+                <a href="https://sepolia.etherscan.io/address/0x7ff52e1adb963e226dc11e1be0c1346019da75c4" target="_blank" rel="noopener noreferrer"
+                  style={{fontSize:'0.6rem', color:'#00aaff', textDecoration:'none'}}>
+                  0x7ff52e1a... ↗
+                </a>
+              </div>
+              <span style={{fontSize:'0.7rem', color:'#00ff88'}}>ACTIVE</span>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', color:'#333', fontSize:'0.8rem'}}>↓ protects</div>
+            <div style={{display:'flex', alignItems:'center', gap:'0.75rem', padding:'0.5rem', background:'#0d0d0d', borderRadius:'4px', border:'1px solid #00aaff22'}}>
+              <span style={{fontSize:'1rem'}}>🐺</span>
+              <div style={{flex:1}}>
+                <div style={{fontSize:'0.75rem', color:'#00aaff', fontWeight:700}}>Layer 1 — Cerberus Protocol</div>
+                <div style={{fontSize:'0.65rem', color:'#555'}}>Monitors CerberusVault</div>
+                <a href="https://cerberus-protocol.vercel.app/api/status" target="_blank" rel="noopener noreferrer"
+                  style={{fontSize:'0.6rem', color:'#00aaff', textDecoration:'none'}}>
+                  /api/status ↗
+                </a>
+              </div>
+              <span style={{fontSize:'0.7rem', color:'#00ff88'}}>ACTIVE</span>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', color:'#333', fontSize:'0.8rem'}}>↓ protects</div>
+            <div style={{display:'flex', alignItems:'center', gap:'0.75rem', padding:'0.5rem', background:'#0d0d0d', borderRadius:'4px', border:'1px solid #00ff8822'}}>
+              <span style={{fontSize:'1rem'}}>🏦</span>
+              <div style={{flex:1}}>
+                <div style={{fontSize:'0.75rem', color:'#00ff88', fontWeight:700}}>CerberusVault</div>
+                <div style={{fontSize:'0.65rem', color:'#555'}}>Protected DeFi vault</div>
+                <a href="https://sepolia.etherscan.io/address/0x6eb6fde2d2462b0afa9f169372677fd69955bad8" target="_blank" rel="noopener noreferrer"
+                  style={{fontSize:'0.6rem', color:'#00aaff', textDecoration:'none'}}>
+                  0x6eb6fde2... ↗
+                </a>
+              </div>
+              <span style={{fontSize:'0.7rem', color:'#00ff88'}}>PROTECTED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Partner badges */}
       <div style={s.section}>
         <div style={s.label}>POWERED BY</div>
