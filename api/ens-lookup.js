@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       capabilities: 'threat-detection,consensus-proposal,on-chain-monitoring',
       url: 'https://cerberus-protocol.vercel.app',
       network: 'Sepolia Testnet',
-      contract: '0x23d58937a7101d015e41525d00f6bfc3dd69a226',
+      contract: '0x6eb6fde2d2462b0afa9f169372677fd69955bad8',
       textRecords: 'on-chain verified',
     },
     'validatora.watcher.cerberusprotocol.eth': {

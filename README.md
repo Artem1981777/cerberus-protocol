@@ -128,7 +128,7 @@ Every consensus round writes to 0G:
 This implements the pattern: agents collaborate via shared 0G Storage memory.
 
 ### Contract Deployments
-- Ethereum Sepolia: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
+- Ethereum Sepolia: 0x6eb6fde2d2462b0afa9f169372677fd69955bad8
 - 0G Galileo Testnet: 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30
 
 ### Team Contact
@@ -139,7 +139,7 @@ This implements the pattern: agents collaborate via shared 0G Storage memory.
 
 | Network | Address |
 |---------|---------|
-| Ethereum Sepolia | 0x23d58937a7101d015e41525d00f6bfc3dd69a226 |
+| Ethereum Sepolia | 0x6eb6fde2d2462b0afa9f169372677fd69955bad8 |
 | 0G Galileo Testnet | 0x3312E9E6A5329397378Eb0fc64EaAe6D88C2Af30 |
 
 ## ENS Profile
@@ -190,7 +190,7 @@ All endpoints are publicly accessible:
 
 KeeperHub executed emergencyPause() on TestTarget contract:
 - TX: 0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
-- Contract: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
+- Contract: 0x6eb6fde2d2462b0afa9f169372677fd69955bad8
 - Etherscan: https://sepolia.etherscan.io/tx/0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
 
 ## Telegram Alerts

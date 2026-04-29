@@ -162,7 +162,7 @@ Every consensus result is logged to 0G decentralized storage:
 
 - Network: Ethereum Sepolia Testnet
 - RPC: Alchemy (eth-sepolia.g.alchemy.com)
-- Contract: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
+- Contract: 0x6eb6fde2d2462b0afa9f169372677fd69955bad8
 - Events monitored:
   - SuspiciousActivity (topic: 0x40922f...)
   - Withdrawal (topic: 0xe1fffc...)
@@ -234,7 +234,7 @@ April 24 – May 3, 2026
 
 KeeperHub successfully executed emergencyPause() on TestTarget contract:
 - TX Hash: 0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199
-- Contract: 0x23d58937a7101d015e41525d00f6bfc3dd69a226
+- Contract: 0x6eb6fde2d2462b0afa9f169372677fd69955bad8
 - Network: Ethereum Sepolia
 - Function: emergencyPause("Cerberus consensus executed")
 - Result: Contract paused on-chain
