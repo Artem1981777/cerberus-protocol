@@ -216,3 +216,29 @@ Each alert includes ENS agent names, evidence, TX hash.
 - Twitter/X: https://x.com/i/status/2049308826977927639
 - Farcaster: https://farcaster.xyz/artem00777/0xf227f5e4
 - ETHGlobal Showcase: https://ethglobal.com/showcase/cerberus-protocol-vmtcd
+
+## Why Cerberus Protocol Matters
+
+DeFi protocols lose billions because:
+1. No one monitors contracts 24/7
+2. Single server makes decisions — one point of failure
+3. By the time humans react, funds are already drained
+
+Cerberus solves this:
+
+Imagine you have a Vault contract with $10M.
+A hacker starts draining it. Cerberus:
+- Detects the threat in 5 seconds
+- Three independent AI agents vote — no single point of failure
+- KeeperHub automatically pauses the contract
+- You get a Telegram alert with full details
+- The hacker cannot withdraw funds
+
+Real use cases:
+- DeFi protocols (Uniswap pools, Aave vaults)
+- DAO Treasury contracts
+- NFT marketplace contracts
+- Any contract with significant TVL
+
+One sentence pitch:
+Cerberus Protocol is an autonomous AI security guard for smart contracts — three independent agents reach consensus and automatically pause the contract before a hacker can drain funds.
