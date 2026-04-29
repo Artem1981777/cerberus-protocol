@@ -242,3 +242,26 @@ Real use cases:
 
 One sentence pitch:
 Cerberus Protocol is an autonomous AI security guard for smart contracts — three independent agents reach consensus and automatically pause the contract before a hacker can drain funds.
+
+## CerberusVault — Protected DeFi Vault
+
+Real DeFi vault contract deployed on Sepolia, protected by Cerberus Protocol:
+
+- **Contract:** 0x6eb6fde2d2462b0afa9f169372677fd69955bad8
+- **Etherscan:** https://sepolia.etherscan.io/address/0x6eb6fde2d2462b0afa9f169372677fd69955bad8
+- **Guard:** KeeperHub wallet 0xAd02ae7bbDF0f46Cc728DBE48d2f122fbaAE9d97
+
+### Live Protection Demo
+
+1. User deposits ETH into CerberusVault
+2. Suspicious activity detected on Sepolia
+3. Three AI agents vote (2/3 consensus)
+4. KeeperHub calls emergencyPause() on CerberusVault
+5. Vault is protected — no funds can be withdrawn
+
+### Proof of Real Execution
+
+emergencyPause() called on CerberusVault:
+- TX: 0xa662a295baeca12a91...
+- Result: Vault paused, funds protected
+- Etherscan: https://sepolia.etherscan.io/tx/0xa662a295baeca12a91...
