@@ -508,7 +508,7 @@ export default function App() {
 }
 
 const s: Record<string, React.CSSProperties> = {
-  root: {background:'#0a0a0a', color:'#e0e0e0', minHeight:'100vh', fontFamily:'monospace', padding:'1.5rem', maxWidth:'960px', margin:'0 auto'},
+  root: {background:'#0a0a0a', color:'#e0e0e0', minHeight:'100vh', fontFamily:'monospace', padding:'1.5rem 3rem', maxWidth:'1400px', margin:'0 auto'},
   header: {display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid #1e1e1e', paddingBottom:'1rem', marginBottom:'1.5rem'},
   headerLeft: {display:'flex', alignItems:'center', gap:'1rem'},
   title: {fontSize:'1.5rem', fontWeight:900, color:'#fff', letterSpacing:'0.05em'},
