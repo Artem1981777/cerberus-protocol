@@ -210,3 +210,9 @@ Each alert includes ENS agent names, evidence, TX hash.
 ## Contact
 - Twitter: ArtemGromov777
 - Telegram: Artem00777
+
+## Social
+
+- Twitter/X: https://x.com/i/status/2049308826977927639
+- Farcaster: https://farcaster.xyz/artem00777/0xf227f5e4
+- ETHGlobal Showcase: https://ethglobal.com/showcase/cerberus-protocol-vmtcd
