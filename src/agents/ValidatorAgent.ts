@@ -50,7 +50,10 @@ Cast your independent vote.`
       agentId,
       vote: (result.vote as Vote) || 'YES',
       reasoning: result.reasoning || 'Threat confirmed',
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      riskScore: result.riskScore || 75,
+      confidence: result.confidence || 'HIGH',
+      keyFactor: result.keyFactor || 'Threat confirmed'
     }
   } catch {
     return {

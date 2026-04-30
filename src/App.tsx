@@ -213,7 +213,24 @@ export default function App() {
                   style={{fontSize:'0.6rem', color:'#00aaff', textDecoration:'none', marginTop:'0.25rem', display:'block'}}>
                   {ENS_NAMES[id]} ↗
                 </a>
-                {vote && <div style={{fontSize:'0.6rem', color:'#666', marginTop:'0.4rem', lineHeight:1.4}}>{vote.reasoning.slice(0, 120)}{vote.reasoning.length > 120 ? '...' : ''}</div>}
+                {vote && (
+                  <div style={{marginTop:'0.4rem'}}>
+                    {(vote as any).riskScore && (
+                      <div style={{marginBottom:'0.3rem'}}>
+                        <div style={{display:'flex', justifyContent:'space-between', fontSize:'0.6rem', color:'#555', marginBottom:'0.2rem'}}>
+                          <span>Risk Score</span>
+                          <span style={{color: (vote as any).riskScore > 70 ? '#ff3300' : (vote as any).riskScore > 40 ? '#ffaa00' : '#00ff88'}}>
+                            {(vote as any).riskScore}/100
+                          </span>
+                        </div>
+                        <div style={{background:'#1a1a1a', borderRadius:'2px', height:'4px', overflow:'hidden'}}>
+                          <div style={{width: (vote as any).riskScore + '%', background: (vote as any).riskScore > 70 ? '#ff3300' : '#ffaa00', height:'100%'}}/>
+                        </div>
+                      </div>
+                    )}
+                    <div style={{fontSize:'0.6rem', color:'#666', lineHeight:1.4}}>{vote.reasoning.slice(0, 100)}...</div>
+                  </div>
+                )}
               </div>
             )
           })}

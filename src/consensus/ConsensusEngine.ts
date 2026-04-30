@@ -18,6 +18,9 @@ export interface AgentVote {
   vote: Vote
   reasoning: string
   timestamp: number
+  riskScore?: number
+  confidence?: string
+  keyFactor?: string
 }
 
 export interface ConsensusResult {
