@@ -3,6 +3,45 @@ import { useSwarmState } from './hooks/useSwarmState'
 import { useOnChainMonitor } from './hooks/useOnChainMonitor'
 import { OnChainEvent } from './agents/WatcherAgent'
 
+const ATTACK_SCENARIOS = [
+  {
+    name: '🚨 Unauthorized Drain',
+    event: 'SuspiciousActivity',
+    args: { actor: '0xDeadBeef', reason: 'Unauthorized withdrawal attempt' },
+    description: 'Unknown address attempts to drain vault'
+  },
+  {
+    name: '⚡ Flash Loan Attack',
+    event: 'SuspiciousActivity', 
+    args: { actor: '0xF1a5H1oan', reason: 'Flash loan attack pattern detected — large borrow + immediate drain' },
+    description: 'Flash loan used to manipulate vault'
+  },
+  {
+    name: '👑 Ownership Takeover',
+    event: 'SuspiciousActivity',
+    args: { actor: '0xHack3r999', reason: 'Unauthorized ownership transfer attempt detected' },
+    description: 'Attacker tries to take control of contract'
+  },
+  {
+    name: '💧 Rug Pull Pattern',
+    event: 'SuspiciousActivity',
+    args: { actor: '0xRugPu11er', reason: 'Liquidity removal pattern — possible rug pull detected' },
+    description: 'Sudden liquidity drain pattern'
+  },
+  {
+    name: '⚠️ Large Withdrawal',
+    event: 'Withdrawal',
+    args: { to: '0xUnknown999', amount: '99000000000000000000' },
+    description: '99 ETH withdrawal to unknown address'
+  },
+  {
+    name: '✅ Normal Deposit',
+    event: 'Deposit',
+    args: { from: '0xRegularUser', amount: '1000000000000000000' },
+    description: 'Regular 1 ETH deposit — no threat'
+  },
+]
+
 const DEMO_EVENTS: OnChainEvent[] = [
   {
     txHash: '0xabc123def456789abcdef1234567890abcdef1234567890abcdef1234567890ab',
@@ -343,18 +382,21 @@ export default function App() {
 
       {/* Simulate */}
       <div style={s.section}>
-        <div style={s.label}>SIMULATE ON-CHAIN EVENT</div>
-        <div style={s.grid3}>
-          {DEMO_EVENTS.map((ev, i) => (
-            <button key={i} disabled={loading} onClick={() => handleEvent(ev)}
-              style={{...s.btn, opacity: loading ? 0.5 : 1, borderColor: ev.eventName === 'SuspiciousActivity' ? '#ff330033' : '#222'}}>
-              <div style={{fontSize:'0.85rem', fontWeight:700,
-                color: ev.eventName === 'SuspiciousActivity' ? '#ff3300' : ev.eventName === 'Withdrawal' ? '#ffaa00' : '#00ff88',
-                marginBottom:'0.25rem'}}>
-                {ev.eventName === 'SuspiciousActivity' ? '🚨' : ev.eventName === 'Withdrawal' ? '⚠️' : '✅'} {ev.eventName}
-              </div>
-              <div style={{fontSize:'0.7rem', color:'#555'}}>Block #{ev.blockNumber}</div>
-              <div style={{fontSize:'0.7rem', color:'#555', fontFamily:'monospace'}}>{ev.txHash.slice(0,16)}...</div>
+        <div style={s.label}>ATTACK SIMULATION — SELECT SCENARIO</div>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:'0.75rem'}}>
+          {ATTACK_SCENARIOS.map((scenario, i) => (
+            <button key={i} disabled={loading}
+              onClick={() => handleEvent({
+                txHash: '0x' + Math.random().toString(16).slice(2).padEnd(64, '0'),
+                contractAddress: '0x6eb6fde2d2462b0afa9f169372677fd69955bad8',
+                eventName: scenario.event,
+                args: scenario.args,
+                blockNumber: 10750000 + Math.floor(Math.random() * 10000),
+              })}
+              style={{...s.btn, opacity: loading ? 0.5 : 1,
+                borderColor: scenario.event === 'SuspiciousActivity' ? '#ff330044' : scenario.event === 'Withdrawal' ? '#ffaa0044' : '#00ff8844'}}>
+              <div style={{fontSize:'0.9rem', fontWeight:700, marginBottom:'0.3rem'}}>{scenario.name}</div>
+              <div style={{fontSize:'0.65rem', color:'#555', lineHeight:1.4}}>{scenario.description}</div>
             </button>
           ))}
         </div>
