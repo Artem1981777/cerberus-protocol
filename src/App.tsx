@@ -581,6 +581,18 @@ export default function App() {
               <span style={{fontSize:'0.7rem', color:'#00ff88'}}>ACTIVE</span>
             </div>
             <div style={{display:'flex', justifyContent:'center', color:'#333', fontSize:'0.8rem'}}>↓ protects</div>
+            <div className="p-4 rounded-xl bg-slate-900/50 border border-blue-500/30">
+              <div className="flex justify-between items-start mb-2">
+                <span className="text-2xl">🔐</span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">LAYER 0</span>
+              </div>
+              <h3 className="font-bold text-white text-sm">Safe Wallet</h3>
+              <p className="text-[10px] text-slate-400 mb-3">Institutional Assets</p>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span className="text-[10px] text-green-400 font-mono">SAFE MODULE ACTIVE</span>
+              </div>
+            </div>
             <div style={{display:'flex', alignItems:'center', gap:'0.75rem', padding:'0.5rem', background:'#0d0d0d', borderRadius:'4px', border:'1px solid #00ff8822'}}>
               <span style={{fontSize:'1rem'}}>🏦</span>
               <div style={{flex:1}}>
@@ -592,6 +604,18 @@ export default function App() {
                 </a>
               </div>
               <span style={{fontSize:'0.7rem', color:'#00ff88'}}>PROTECTED</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900/50 border border-blue-500/30">
+              <div className="flex justify-between items-start mb-2">
+                <span className="text-2xl">🔐</span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">LAYER 0</span>
+              </div>
+              <h3 className="font-bold text-white text-sm">Safe Wallet</h3>
+              <p className="text-[10px] text-slate-400 mb-3">Institutional Assets</p>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span className="text-[10px] text-green-400 font-mono">SAFE MODULE ACTIVE</span>
+              </div>
             </div>
           </div>
         </div>
