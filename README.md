@@ -285,3 +285,9 @@ Protection layers:
 - Layer 2: CerberusGuard monitors Cerberus Protocol itself
 
 If Cerberus is compromised — CerberusGuard detects and responds.
+
+---
+
+> **Historical Note:** This entire protocol, including AI swarms, smart contracts, and dashboard, was built, tested, and deployed entirely on an Android mobile device via Termux. 
+
+*Built for ETHGlobal Open Agents 2026*
