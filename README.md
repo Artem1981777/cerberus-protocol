@@ -1,5 +1,9 @@
 # Cerberus Protocol
 
+![Cerberus Dashboard](./assets/main-dashboard.jpg)
+
+# Cerberus Protocol
+
 > Three-headed AI agent swarm guarding smart contracts.
 > No central coordinator. Peer consensus before action. Unstoppable.
 
