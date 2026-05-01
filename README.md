@@ -443,3 +443,9 @@ Cerberus is not just a tool; it is a scalable **Decentralized Security Network**
 - **Agent Market**: Any DAO can hire a Cerberus "Head" to protect their treasury.
 - **Slashing for Agents**: Future iterations will include staking for AI agents to ensure high-fidelity analysis.
 - **Cross-Chain Sentinel**: Expanding the swarm to protect assets across all EVM-compatible L2s.
+
+## 🛠 Tech Stack & Tools
+- **Security**: [Safe](https://safe.global) (Smart Account Control)
+- **Storage**: [0G Labs](https://0g.ai) (Decentralized Audit Logs)
+- **Identity**: [ENS](https://ens.domains) (Agent Identities)
+- **Environment**: Developed entirely on Android via **Termux**.
