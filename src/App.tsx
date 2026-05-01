@@ -331,6 +331,21 @@ export default function App() {
                 <div style={{color:'#555', fontSize:'0.7rem'}}>
                   ⚡ KeeperHub alerted · 🗄️ 0G audit written
                 </div>
+                {state.currentProposal && (
+                  <a
+                    href={'/api/report?severity=' + state.currentProposal.severity +
+                      '&event=' + state.currentProposal.eventType +
+                      '&evidence=' + encodeURIComponent(state.currentProposal.evidence) +
+                      '&yes=' + state.result!.yesCount +
+                      '&proposalId=' + state.currentProposal.id +
+                      '&txHash=' + state.currentProposal.txHash}
+                    target="_blank" rel="noopener noreferrer"
+                    style={{fontSize:'0.7rem', color:'#00ff88', textDecoration:'none',
+                      border:'1px solid #00ff8844', padding:'0.3rem 0.75rem', borderRadius:'4px',
+                      display:'inline-block', marginTop:'0.5rem'}}>
+                    📋 View Incident Report ↗
+                  </a>
+                )}
                 <div style={{color:'#555', fontSize:'0.7rem', marginTop:'0.25rem'}}>
                   {new Date(state.result.executedAt!).toISOString()}
                 </div>
