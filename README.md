@@ -1,8 +1,32 @@
 # Cerberus Protocol
 
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
+
 ![Cerberus Dashboard](./assets/main-dashboard.jpg)
 
 # Cerberus Protocol
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 
 > Three-headed AI agent swarm guarding smart contracts.
 > No central coordinator. Peer consensus before action. Unstoppable.
@@ -27,11 +51,35 @@ Smart contract security monitoring is broken:
 ## ✅ The Solution — Fully Autonomous, Real On-Chain Actions
 
 > **Not a simulation.** Cerberus Protocol executes REAL protective actions on Sepolia.
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 > Proof of real emergencyPause() execution: [0x66194a31...](https://sepolia.etherscan.io/tx/0x66194a31ced8986c50eedaa6e134e5d4aa4c3ca99b887bbca9bdb7d17190a199)
 
 ## The Solution
 
 Cerberus Protocol deploys three specialized AI agents (three heads):
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 
 1. Head-1 (Watcher) - monitors on-chain events in real time
 2. Head-2 (Validator A) - independently critiques threat proposals
@@ -112,6 +160,18 @@ Built at ETHGlobal Open Agents 2026 - April 24 to May 3 2026
 ## 0G Agent Coordination (for 0G Swarms Prize)
 
 Cerberus Protocol implements the specialist agent swarm pattern on 0G:
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 
 ### How Agents Communicate and Coordinate
 
@@ -223,6 +283,18 @@ Each alert includes ENS agent names, evidence, TX hash.
 
 ## Why Cerberus Protocol Matters
 
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
+
 DeFi protocols lose billions because:
 1. No one monitors contracts 24/7
 2. Single server makes decisions — one point of failure
@@ -247,9 +319,33 @@ Real use cases:
 One sentence pitch:
 Cerberus Protocol is an autonomous AI security guard for smart contracts — three independent agents reach consensus and automatically pause the contract before a hacker can drain funds.
 
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
+
 ## CerberusVault — Protected DeFi Vault
 
 Real DeFi vault contract deployed on Sepolia, protected by Cerberus Protocol:
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 
 - **Contract:** 0x6eb6fde2d2462b0afa9f169372677fd69955bad8
 - **Etherscan:** https://sepolia.etherscan.io/address/0x6eb6fde2d2462b0afa9f169372677fd69955bad8
@@ -276,13 +372,49 @@ Who watches the watchmen? Cerberus does.
 
 CerberusGuard monitors Cerberus Protocol itself — a second layer of AI security:
 
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
+
 - **Contract:** 0x7ff52e1adb963e226dc11e1be0c1346019da75c4
 - **Etherscan:** https://sepolia.etherscan.io/address/0x7ff52e1adb963e226dc11e1be0c1346019da75c4
 - **Monitors:** CerberusVault (0x6eb6fde2d2462b0afa9f169372677fd69955bad8)
 
 Protection layers:
 - Layer 1: Cerberus Protocol monitors CerberusVault
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 - Layer 2: CerberusGuard monitors Cerberus Protocol itself
+
+## 🚨 The Critical Pain Point
+Current DeFi security relies on **centralized watchtowers** or slow governance. When a protocol is under attack, every second costs millions. 
+- **Centralized Oracles**: Single point of failure.
+- **Manual Intervention**: Too slow for flash-loan speeds.
+- **Static Rules**: Hackers always find a way around hardcoded logic.
+
+## 🐺 The Cerberus Solution: Decentralized AI Swarm
+Cerberus Protocol introduces a **Three-Headed AI Security Swarm** that acts as a decentralized "Jury of Agents."
+1. **Unstoppable Consensus**: Three independent AI agents (Watcher & Validators) must agree on a threat.
+2. **Programmatic Custody**: Direct integration with **Gnosis Safe** via Layer 0 module.
+3. **Identity & Audit**: Every agent has an **ENS identity**, and every decision is audited on **0G Labs** decentralized storage.
 
 If Cerberus is compromised — CerberusGuard detects and responds.
 
@@ -300,3 +432,8 @@ If Cerberus is compromised — CerberusGuard detects and responds.
 
 ### Threat Analysis
 ![Detailed Dashboard](./assets/Screenshot_2026-05-01-09-24-07-499_com.kiwibrowser.browser.jpg)
+
+## ✨ Why it is a Game Changer (The "WOW" Factor)
+- **Autonomous Defense**: First protocol where AI can programmatically lock a Safe Wallet based on on-chain consensus.
+- **Unmatched Traceability**: Not just a bot—a verifiable legal-grade audit trail on 0G Labs.
+- **Mobile-Born Innovation**: Built entirely in a mobile environment, proving that next-gen security infra can be built anywhere, by anyone.
