@@ -291,3 +291,12 @@ If Cerberus is compromised — CerberusGuard detects and responds.
 > **Historical Note:** This entire protocol, including AI swarms, smart contracts, and dashboard, was built, tested, and deployed entirely on an Android mobile device via Termux. 
 
 *Built for ETHGlobal Open Agents 2026*
+
+## 📸 System Gallery
+
+### AI Swarm Intelligence
+![Telegram Alerts](./assets/Screenshot_2026-05-01-09-23-41-665_org.telegram.messenger.jpg)
+![Agent Consensus](./assets/Screenshot_2026-05-01-09-23-49-126_org.telegram.messenger.jpg)
+
+### Threat Analysis
+![Detailed Dashboard](./assets/Screenshot_2026-05-01-09-24-07-499_com.kiwibrowser.browser.jpg)
