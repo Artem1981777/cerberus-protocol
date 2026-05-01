@@ -437,3 +437,9 @@ If Cerberus is compromised — CerberusGuard detects and responds.
 - **Autonomous Defense**: First protocol where AI can programmatically lock a Safe Wallet based on on-chain consensus.
 - **Unmatched Traceability**: Not just a bot—a verifiable legal-grade audit trail on 0G Labs.
 - **Mobile-Born Innovation**: Built entirely in a mobile environment, proving that next-gen security infra can be built anywhere, by anyone.
+
+## 🔭 Future Vision: Agentic Accountability
+Cerberus is not just a tool; it is a scalable **Decentralized Security Network**. 
+- **Agent Market**: Any DAO can hire a Cerberus "Head" to protect their treasury.
+- **Slashing for Agents**: Future iterations will include staking for AI agents to ensure high-fidelity analysis.
+- **Cross-Chain Sentinel**: Expanding the swarm to protect assets across all EVM-compatible L2s.
