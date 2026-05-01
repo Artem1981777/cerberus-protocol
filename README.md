@@ -449,3 +449,6 @@ Cerberus is not just a tool; it is a scalable **Decentralized Security Network**
 - **Storage**: [0G Labs](https://0g.ai) (Decentralized Audit Logs)
 - **Identity**: [ENS](https://ens.domains) (Agent Identities)
 - **Environment**: Developed entirely on Android via **Termux**.
+
+## 💡 Special Achievement: Mobile-First Engineering
+> **Mentor Note**: One of the most impressive aspects of Cerberus Protocol is its development environment. Integrating complex SDKs from **Safe**, **0G Labs**, and **ENS** directly into a **Termux (Android)** environment required unique optimization and creative problem-solving. This proves that high-level Web3 security infrastructure can be built and maintained entirely from a mobile device, pushing the boundaries of decentralized development.
